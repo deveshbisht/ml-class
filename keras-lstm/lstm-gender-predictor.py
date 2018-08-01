@@ -70,5 +70,5 @@ model.add(Dense(2, activation='softmax'))
 
 model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-model.fit(X, y,validation_split=0.2, callbacks=[WandbCallback()])
+model.fit(X, y,epochs= 5,validation_split=0.2, callbacks=[WandbCallback()])
 

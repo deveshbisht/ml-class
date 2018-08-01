@@ -41,7 +41,7 @@ class CharacterTable(object):
 
 # Parameters for the model and dataset.
 config.training_size = 50000
-config.digits = 3
+config.digits = 5
 config.reverse = True
 config.hidden_size = 128
 config.batch_size = 128
@@ -69,9 +69,9 @@ while len(questions) < config.training_size:
         continue
     seen.add(key)
     # Pad the data with spaces such that it is always MAXLEN.
-    q = '{}+{}'.format(a, b)
+    q = '{}-{}'.format(a, b)
     query = q + ' ' * (maxlen - len(q))
-    ans = str(a + b)
+    ans = str(a - b)
     # Answers can be of maximum size DIGITS + 1.
     ans += ' ' * (config.digits + 1 - len(ans))
     if config.reverse:

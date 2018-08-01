@@ -17,10 +17,10 @@ config = wandb.config
 config.vocab_size = 1000
 config.maxlen = 300
 config.batch_size = 32
-config.embedding_dims = 50
-config.filters = 250
+config.embedding_dims = 20
+config.filters = 14
 config.kernel_size = 3
-config.hidden_dims = 100
+config.hidden_dims = 12
 config.epochs = 10
 
 (X_train, y_train), (X_test, y_test) = imdb.load_imdb()
@@ -37,6 +37,12 @@ model = Sequential()
 model.add(Embedding(config.vocab_size,
                     config.embedding_dims,
                     input_length=config.maxlen))
+#adding cnn layer
+model.add(Conv1D(config.filters,
+                 config.kernel_size,
+                 padding='valid',
+                 activation='relu'))
+#
 model.add(LSTM(config.hidden_dims, activation="sigmoid"))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy',

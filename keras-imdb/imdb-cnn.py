@@ -12,13 +12,14 @@ from keras.preprocessing import text
 
 wandb.init()
 config = wandb.config
+#config.epochs = 2
 
 # set parameters:
 config.vocab_size = 1000
 config.maxlen = 1000
 config.batch_size = 32
-config.embedding_dims = 50
-config.filters = 250
+config.embedding_dims = 16
+config.filters = 16
 config.kernel_size = 3
 config.hidden_dims = 250
 config.epochs = 10
@@ -27,8 +28,8 @@ config.epochs = 10
 
 tokenizer = text.Tokenizer(num_words=config.vocab_size)
 tokenizer.fit_on_texts(X_train)
-X_train = tokenizer.texts_to_matrix(X_train)
-X_test = tokenizer.texts_to_matrix(X_test)
+X_train = tokenizer.texts_to_matrix(X_train, mode= "tfidf")
+X_test = tokenizer.texts_to_matrix(X_test, mode= "tfidf")
 
 X_train = sequence.pad_sequences(X_train, maxlen=config.maxlen)
 X_test = sequence.pad_sequences(X_test, maxlen=config.maxlen)
